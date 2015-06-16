@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	 <meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>ROR index</title>
+</head>
+<body>
+	<h1>Listando Usuarios</h1>
+	<% flash.each do|key,value| %>
+		<div><%= value %></div>
+	<% end %>
+	<table>
+		<tr>
+			<td>Nombre</td>
+			<td>Email</td>
+		</tr>
+		<% @usuarios.each do |usuario| %>
+			<tr>
+				<td><%= link_to usuario.nombre, usuario %></td>
+				<td><%= usuario.email %></td>
+				<td><%= link_to "Editar", edit_user_path(usuario) %></td>
+				<td><%= link_to "Eliminar", usuario,method: :delete, confirm:"estas seguro?" %></td>
+			</tr>
+		<% end %>
+		<% if @usuarios.size==0 %>
+			usuarios No encontrados
+		<% end %>
+	</table>
+	<%= link_to 'nuevo usuario', new_user_path %>
+	<%= link_to 'Registrar', '/signup' %>
+</body>
+</html>
